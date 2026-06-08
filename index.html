@@ -87,7 +87,7 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 /* ── PROGRESS BAR ───────────────────────────────────────────── */
@@ -273,6 +273,8 @@ body {
 .question-screen {
   flex-direction: column;
   flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .q-header {
   padding: 20px 24px 0;
@@ -423,8 +425,8 @@ body {
 }
 .q-textarea {
   width: 100%;
-  min-height: 80px;
-  max-height: 140px;
+  min-height: 72px;
+  max-height: 110px;
   background: var(--white);
   border: 2px solid var(--black);
   border-radius: 16px;
@@ -491,11 +493,17 @@ body {
 
 /* ── NEXT BTN ───────────────────────────────────────────────── */
 .q-footer {
-  padding: 24px 28px 40px;
+  padding: 16px 28px 32px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   flex-shrink: 0;
+  position: sticky;
+  bottom: 0;
+  bottom: env(safe-area-inset-bottom, 0);
+  background: var(--cream);
+  z-index: 10;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
 }
 .btn-next {
   display: flex;
@@ -776,7 +784,7 @@ body {
     <div class="prize-body">
       <div class="prize-emoji" id="prize-emoji">🎉</div>
       <h2 class="prize-headline">Você ganhou uma sobremesa!</h2>
-      <p class="prize-sub">Envie o print desta tela no seu próximo pedido e nós te mandamos uma sobremesa da Vitto &amp; Giulio! 🍕🍮</p>
+      <p class="prize-sub">Guarde este print! No seu próximo pedido, apresente-o e ganhe uma sobremesa da Vitto &amp; Giulio. 🍕🍮</p>
       <div class="prize-badge">
         <span class="prize-badge-text">PRESENTE VG</span>
       </div>
@@ -1111,6 +1119,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildStars('pizza-stars',   'pizzaRating',   'btn-pizza-next');
   buildStars('service-stars', 'serviceRating', 'btn-service-next');
 });
+
 </script>
 </body>
 </html>
